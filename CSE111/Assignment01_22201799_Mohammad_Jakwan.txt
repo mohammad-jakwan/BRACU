@@ -1,0 +1,305 @@
+//Task1
+import java.util.Scanner;
+public class task1{
+    public static void main(String[]args){
+        int a=10;
+        System.out.println(a);
+        int b=5;
+        System.out.println(a+b);
+        System.out.println(a*b);
+        System.out.println(a/b);
+
+        double c=10.56;
+        System.out.println(c);
+        double d=5.45;
+        System.out.println(c+d);
+        System.out.println(c*d);
+        System.out.println(c/d);
+
+        double e=10.56;
+        System.out.println(e);
+        int f=5;
+        System.out.println(e+f);
+        System.out.println(e*f);
+        System.out.println(e/f);
+
+        String g="10";
+        System.out.print(g);
+        String h="5";
+        System.out.println(e+f);
+        System.out.println(e*f);
+        System.out.println(e/f);
+
+        String i="10";
+        System.out.println(i);
+        int j=5;
+        System.out.println(i+j);
+        System.out.println(j+i);
+       
+        Scanner sc =new Scanner (System.in);
+        System.out.println("Please enter 1st number:");
+        int k=sc.nextInt();
+        System.out.println("Please enter 1st number:");
+        int l=sc.nextInt();
+        System.out.println(k);
+        System.out.println(k+l);
+        System.out.println(k*l);
+        System.out.println(k/l);
+
+
+
+    }
+}
+//Task2
+public class task2 {
+    public static void main (String[]args){
+        int a=5;
+        int b=6;
+
+        int temp=a;
+        a=b;
+        b=temp;
+        System.out.println(a);
+        System.out.println(b);
+
+        a=a+b;
+        b=a-b;
+        a=a-b;
+        System.out.println(a);
+        System.out.println(b);
+    }
+}
+
+
+//Task3
+public class task3 {
+    public static void main(String[] args) {
+        int id=23221454;
+        int a=id%10;
+        System.out.println(a);
+        int b=(id%100)/10;
+        System.out.println(b);
+    }
+}
+
+
+//Task4
+import java.util.Scanner;
+
+public class task4 {
+    public static void main(String[]args){
+
+    
+     Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    
+    
+    System.out.println( n + " x 1 = " + (n*1));
+    System.out.println( n + " x 2 = " + (n*2));
+    System.out.println( n + " x 3 = "+ (n*3 ));
+    System.out.println( n +" x 4 = " +(n*4 ));
+    System.out.println( n+ " x 5 = " +(n*5));
+    System.out.println( n +" x 6 = "+ (n*6));
+    System.out.println( n +" x 7 = " +(n*7));
+    System.out.println( n+ " x 8 = "+ (n*8));
+    System.out.println( n +" x 9 = "+ (n*9));
+    System.out.println( n+ " x 10 = " +(n*10));
+}
+}
+
+
+//Task5
+import java.util.Scanner;
+public class task5 {
+    public static void main (String[]args){
+        Scanner sc= new Scanner(System.in);
+        System.out.println("1st input:");
+        int a=sc.nextInt();
+        System.out.println("2nd input:");
+        int b=sc.nextInt();
+        System.out.println("3rd input:");
+        int c=sc.nextInt();
+
+        if(a>b && a>c){
+            System.out.println("Largest number:"+a);
+        }
+        else if(b>a && b>c){
+            System.out.println("Largest number:"+b);
+            
+        }
+        else if(c>a && c>b){
+            System.out.println("Largest number:"+c);
+        }
+    }
+}
+
+
+//Task6
+import java.util.Scanner;
+public class task6 {
+  public static void main(String[]args){
+    
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    
+    if (n %100 ==0){
+      System.out.println( n + " is not a leap year");
+    }
+      
+    else if (n %100 == 0 && (n/400==0)){
+        System.out.println( n + " is a leap year");
+      }
+        
+    else if (n%4==0){
+      System.out.println( n + " is a leap year");
+      }
+    else{
+      System.out.println( n + " is not a leap year");
+    }
+    
+  }
+
+}
+
+
+//Task7
+import java.util.Scanner;
+public class task7{
+    public static void main (String[]args){
+        Scanner sc= new Scanner(System.in);
+        System.out.println("Please enter your input:");
+        int a=sc.nextInt();
+
+
+        if(a%5==0 && a%7==0){
+            System.out.println("Divisible by both");
+        }
+        else if(a%5==0){
+            System.out.println("Invalid: Divisible by 5 only");
+        }
+        else if(a%7==0){
+            System.out.println("Invalid: Divisible by 7 only");
+        }
+
+        else{
+            System.out.println("No");
+        }
+    }
+}
+
+
+//Task8
+import java.util.Scanner;
+public class task8 {
+    public static void main (String[]args){
+        Scanner sc= new Scanner(System.in);
+        System.out.println("Please enter your id:");
+        int a=sc.nextInt();
+
+        int year=a/1000000;
+        int session=(a/100000)%10;
+        if (session==1){
+            System.out.println("Student joined BRAC in Spring "+year);
+
+        }
+        else if (session==2){
+            System.out.println("Student joined BRAC in Fall "+year);
+
+        }
+        else{
+            System.out.println("Student joined BRAC in Summer "+year);
+
+        }
+    }
+    }
+
+
+
+//Task9
+import java.util.Scanner;
+  public class task9
+{
+  public static void main(String[] args)
+  {
+    Scanner sc=new Scanner(System.in);
+    
+    
+    System.out.println("please enter your cg:");
+    double cg = sc.nextDouble();
+    
+    System.out.println("Please enter your completed credit:");
+    int credit = sc.nextInt();
+
+
+    if (credit >30){
+    
+      if (cg==4.0){
+      System.out.println("The student is eligible for a waiver of 100 percent"); 
+    }
+      else if (cg>=3.80 && cg<=3.89){
+      System.out.println("The student is eligible for a waiver of 25 percent"); 
+    }
+      else if (cg>=3.90 && cg<=3.94){
+      System.out.println("The student is eligible for a waiver of 50 percent"); 
+    }
+      else if (cg>=3.95 && cg<=3.99){
+      System.out.println("The student is eligible for a waiver of 75 percent"); 
+    }
+      else{
+        System.out.println("The student is not eligible for a waiver");
+    }
+    }
+    else{
+      System.out.println("The student is not eligible for a waiver");
+    }
+                        
+  }
+}
+
+
+//Task10
+import java.util.Scanner;
+public class task10 {
+    public static void main (String[]args){
+        Scanner sc= new Scanner(System.in);
+        System.out.println("Please enter an input:");
+        int a=sc.nextInt();
+
+        
+        if (a%2==0 && a%5==0){
+            System.out.println("Multiple of 2 and 5 both");
+        }
+        else if( a%2==0 || a%5==0){
+            System.out.println(a);
+        }
+        
+        else{
+            System.out.println("Not a multiple we want");
+        }
+    }
+}
+
+//Task11
+import java.util.Scanner;
+  public class task11
+{
+  public static void main(String[] args)
+  {
+    Scanner sc=new Scanner(System.in);
+    
+    int x = sc.nextInt();
+    
+    if (x<0){
+      System.out.println(2*x);
+    }
+    if (x>=0 && x< 2){
+      System.out.println(x +1);
+    }
+    if (x>=2 && x<5){
+      System.out.println((x*x)-1);
+    }
+    if (x>=5){
+      System.out.println((3*x*x)+2);
+    }
+    }
+}
