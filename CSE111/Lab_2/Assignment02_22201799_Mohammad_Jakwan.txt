@@ -1,0 +1,433 @@
+ //Task 1 (a)
+
+public class L2T1_a{
+  public static void main(String [] args){
+    
+    for (int i =2; i <=50; i = i+4){
+      
+      System.out.print(i);
+        if (i != 50){
+        System.out.print(", ");
+      }
+
+    }
+  }
+ }
+
+
+ //Task 1 (b)
+
+public class L2T1_b{
+  public static void main(String [] args){
+    
+    int temp = 0;
+    int i = 1;
+    while (true){
+      
+      temp+=i;
+      
+      System.out.print(temp);
+        if (temp !=120){
+        System.out.print(", ");
+      }
+        if (temp ==120){
+          break;
+        }
+        i+=1;
+
+    }
+  }
+ }
+
+
+//Task 2
+
+public class L2T2{
+  public static void main(String [] args){
+    
+    boolean flag = true;
+    for (int i =0; i <=20; i = i++){
+      if (i==20){
+        flag=false;
+      }
+      if (flag==true){
+        i+=2;
+      }
+      
+        else{
+          i-=2;
+          if (i<2){
+            break;
+      }
+        }
+        
+      System.out.print(i+" ");
+
+    }
+  }
+  }
+
+
+//Task 3 
+
+import java.util.Scanner;
+public class L2T3{
+  public static void main(String [] args){
+    Scanner sc = new Scanner(System.in);
+    int sum= 0;
+    int max = -99999;
+    int min = 99999;
+    double counter = 0.0;
+    int count=0;
+    
+    while (count<10){
+
+      int input = sc.nextInt();
+      counter+=1;
+      sum+=input;   
+        if (input<min){
+        min = input;
+        }
+        if (input>max){
+        max = input;
+        }
+        count+=1;
+      }
+    System.out.println("Sum = "+sum);
+    System.out.println("Minimum = "+min);
+    System.out.println("Maximum = "+max);
+    System.out.println("Average = " + (sum/counter));
+  }
+  }
+
+//Task 4
+
+import java.util.Scanner;
+public class L2T4{
+  public static void main(String [] args){
+    Scanner sc = new Scanner(System.in);
+    int sum= 0;
+    int max = -99999999;
+    int min = 999999999;
+    double counter = 0.0;
+    int count=0;
+    
+    while (count<10){
+      count+=1;
+      int input = sc.nextInt();
+      if (input>0 && input%2!=0){
+      counter+=1;
+      sum+=input;   
+        if (input<min){
+        min = input;
+        }
+        if (input>max){
+        max = input;
+        }
+        
+        }
+       else{
+        continue;
+      }
+    }
+      if (sum==0){
+        System.out.println("No odd positive numbers found");
+      }
+      else{
+
+    System.out.println("Sum = "+sum);
+    System.out.println("Minimum = "+min);
+    System.out.println("Maximum = "+max);
+    System.out.println("Average = " + (sum/counter));
+      }
+  }
+  }
+  
+
+//Task 5 
+
+import java.util.Scanner;
+public class L2T5{
+  public static void main(String [] args){
+    Scanner sc = new Scanner(System.in);
+    int sum= 0;
+    int max = -99999;
+    int min = 99999;
+    double counter = 0.0;
+    int zerocount=0;
+    
+    while (true){
+      if ( zerocount==3){
+        break;
+      }
+      int input = sc.nextInt();
+      if (input == 0){
+        zerocount+=1;
+      }
+      else{
+        zerocount=0;
+      }
+      if (input!=0){
+      counter+=1;
+      }
+      sum+=input;
+      
+      if (input!=0){
+        if (input<min){
+        min = input;
+        }
+        if (input>max){
+        max = input;
+        }
+      }
+    }
+    System.out.println("Sum = "+sum);
+    System.out.println("Minimum = "+min);
+    System.out.println("Maximum = "+max);
+    System.out.println("Average = " + (sum/counter));
+    
+    
+  }
+  }
+
+
+//Task 6
+
+import java.util.Scanner;
+public class L2T6{
+  public static void main(String [] args){
+    Scanner sc = new Scanner(System.in);
+    double sum = 0;
+    double tweight = 0;
+    
+    for (int i=0; i<5; i++){
+      System.out.println("Enter num")
+      double num = sc.nextDouble();
+      for (int j=0; j<5;j++){
+        System.out.println("Enter weight")
+        double weight = sc.nextDouble();
+        
+         sum = sum + (num*weight);
+         tweight = tweight + weight;
+         break;
+      }
+
+        
+    }
+      System.out.println("Weighted Average = "+ sum/tweight);
+  }
+}
+
+
+//Task 7 (a)
+
+import java.util.Scanner;
+public class L2T7{
+  public static void main(String [] args){
+    Scanner sc = new Scanner(System.in);
+    int input = sc.nextInt();
+    int next = 0;
+    int current = 1;
+    int previous = 0;
+    
+    while (true){
+      next = current + previous;
+      previous = current;
+      current = next;
+        if (current>input){
+        break;
+      }
+      System.out.print(current+" ");
+    }
+  }
+}
+
+
+
+//Task 7 (b)
+
+import java.util.Scanner;
+public class L2T7_b{
+  public static void main(String [] args){
+    Scanner sc = new Scanner(System.in);
+    int input = sc.nextInt();
+    int next = 0;
+    int current = 1;
+    int previous = 0;
+    int sum = 0;
+    
+    while (true){
+        if (current>input){
+        break;
+      }
+      System.out.print(current+" ");
+      next = current + previous;
+      previous = current;
+      current = next;
+      sum += previous;
+    }
+    System.out.println("Sum = " +sum);
+  }
+}
+
+// Task 8
+
+import java.util.Scanner;
+public class task28 {
+  public static void main(String[]args){
+    
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Please enter num1:");
+    int num1=sc.nextInt();
+    System.out.println("Please enter num2:");
+    int num2=sc.nextInt();
+    int count=0;
+    int counter=0;
+    int temp=0;
+
+
+    if(num1>num2){
+      temp=num1;
+      num1=num2;
+      num2=temp;
+    }
+  
+    for(int i=num1+1;i<num2;i++){
+      count=0;
+      if(i>1){
+        for (int j=2;j<i;j++){
+         if(i%j==0){
+            count=count+1;
+         }
+      }
+    }
+      if(count==0){
+        counter=counter+1;
+      }
+    }
+    
+    System.out.println("There are "+counter+" prime numbers between "+num1+" and "+num2);
+}
+}
+
+//Task9 (a)
+
+
+import java.util.Scanner;
+public class task29a{
+    public static void main(String[]args){
+        Scanner sc= new Scanner (System.in);
+        System.out.println("please enter an integer:");
+        int a=sc.nextInt();
+        int count=0;
+        
+
+        for(int i=a;i>0;i=i/10){
+            count=count+1;
+        
+        }
+        System.out.println(count);
+   
+    }
+}
+
+//Task9 (b)
+
+import java.util.Scanner;
+public class task29b {
+    public static void main(String[]args){
+        Scanner sc=new Scanner (System.in);
+        System.out.println("Please enter an integer:");
+        int a =sc.nextInt();
+    
+        int count=0;
+        
+        
+        
+
+        for(int i=a;i>0;i=i/10){
+            count=count+1;
+        }
+        int b=(int)Math.pow(10,count-1);
+
+        for(int i=b;i>0;i=i/10){
+            int c=a/i;
+            a=a%i;
+            System.out.print(c*7+" ");
+        }
+    }
+}
+
+
+//Task10
+
+import java.util.Scanner;
+public class task210{
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Please enter an amount of money:");
+        int amount=sc.nextInt();
+        int[] notes = {500, 100, 50, 10, 5, 1};
+        
+        
+
+        
+
+        for (int i = 0; i < notes.length; i++) {
+            int count=0;
+            while (amount >= notes[i]) {
+                amount -= notes[i];
+                count++;
+            }
+            if(count!=0){
+                System.out.println(count+" "+notes[i]+"'s note");
+            }
+        }
+
+    
+    }
+}
+
+
+//Task11 (a)
+
+import java.util.Scanner;
+public class task211a{
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("please enter a number:");
+        int a =sc.nextInt();
+
+        for(int i=1;i<=a;i++){
+            for(int j=0;j<a;j++){
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+//Task11 (b)
+
+import java.util.Scanner;
+public class task211b{
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("please enter a number:");
+        int a =sc.nextInt();
+
+        for(int i=1;i<=a;i++){
+            for(int j=0;j<i;j++){
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+
+
+
