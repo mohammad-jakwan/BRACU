@@ -1,0 +1,96 @@
+import java.util.*;
+public class L3_T1_A{
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("N");
+        int size=sc.nextInt();
+        int [] arr1= new int [size];
+        int [] arr2 = new int [size -1];
+        boolean flag=true;
+
+        for(int i=0;i<size;i++){
+          int element = sc.nextInt();
+          arr1[i]= element;
+     }
+                 
+        System.out.println("Remove Element");
+        int r =sc.nextInt();
+        for (int j =0; j<arr1.length; j++){
+          if (arr1[j]!=r){
+            arr2[j] = arr1[j];
+          }
+        }
+        for (int j =0; j<arr1.length; j++){
+          if (arr1[j]!=r){
+            flag=true;
+          }
+          else{
+            flag=false;
+        }
+        }
+
+        
+          System.out.println("Input array");
+          for (int i =0; i<arr1.length; i++){
+            System.out.print(arr1[i]+" ");
+          }
+          
+        if(flag==false){
+        System.out.println("New array");
+          for (int i =0; i<arr2.length; i++){
+            System.out.print(arr2[i]+" ");
+          }
+        }
+        else{
+          System.out.println("Element not found");
+        }
+          
+    }
+}
+
+
+import java.util.Scanner;
+
+public class L3_T4{
+  public static void main (String [] args){
+    
+    Scanner sc = new Scanner(System.in);
+    String input = sc.nextLine();
+    int count = 1;
+    char temp = ' ';
+    String duplicate ="";
+    
+    for (int i =0; i<input.length(); i++){
+                temp= input.charAt(i);
+      for ( int j = i+1; j<input.length(); j++){
+        for (int x=0; x<duplicate.length(); x++){
+          if (temp != duplicate.charAt(x)){
+            
+            
+            if(input.charAt(i) == input.charAt(j)){
+              count++;        
+            }
+          }
+        
+        }
+      if (count==0){
+        System.out.println("You entered "+input);
+      }
+      else{
+        System.out.println(temp+" has been counted " +count+ " times in the word "+ input);
+      duplicate+=temp;
+      }
+      
+      count=1;
+    }
+        
+           
+  }
+}
+}  
+    
+
+
+
+string 4 
+array 1,4,5
