@@ -1,0 +1,16 @@
+public class CheckingAccount extends Account{
+  public static int count=0;
+  
+   public CheckingAccount(){
+    super.Account(x);
+    count++;
+  }
+  public CheckingAccount(double x){
+    super.Account(x);
+    count++;
+  }
+  
+  public double showBalance(){
+    return balance;
+  }
+}
