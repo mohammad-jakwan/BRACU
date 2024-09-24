@@ -1,0 +1,212 @@
+// Task 1
+
+public class Assignment{
+  
+  public String difficulty;
+  public int tasks;
+  public Boolean submission = false;
+  
+  public void printDetails(){
+    System.out.println(" Number of tasks: "+ tasks);
+    System.out.println(" Difficulty level: "+ difficulty);
+    System.out.println(" Submission required: "+submission);
+  }
+  
+  public void makeOptional(){
+    if(submission == true){
+      System.out.println("Assignment will not require submission");
+      submission =false;
+    }
+    else{
+      System.out.println("Submission is already not required");
+    }
+  }
+}
+
+
+// Task 2
+
+public class Shelf{
+  
+  public int capacity =0 ;
+  public int books = 0;
+ 
+  public void showDetails(){
+    System.out.println("Shelf Capacity: "+capacity);
+    System.out.println("Number of books: "+ books);
+  }
+  
+  public void addBooks(int x){
+    if (capacity-books <= 0){
+      System.out.println("Zero capacity. Cannot add books.");
+    }
+                         
+    else if (capacity>books+x){
+      System.out.println(x+" books added to shelf");
+      books += x;
+    }
+    else{
+      System.out.println("Exceeds capacity");
+    }
+  }      
+}
+
+
+// Task 3
+
+public class LightController {
+    public Boolean status = false;
+    public int level = 0;
+
+    public void switchLight() {
+        if (status == true) {
+            status = false;
+            level = 0;
+            System.out.println("Lights are now OFF.");
+        }
+	 else {
+            status = true;
+            level = 1;
+            System.out.println("Lights are now ON.");
+        }
+    }
+
+    public void showLightStatus() {
+        if (status == false) {
+            System.out.println("Light Status: OFF");
+        }
+	 else {
+            System.out.println("Light Status: ON");
+        }
+        System.out.println("Brightness Level: " + level);
+    }
+
+    public void adjustBrightness(int x) {
+        if (status == false) {
+            System.out.println("Please turn on the light first!");
+        } 
+        else {
+          level += x;
+          if (level >= 0 && level < 11) {
+             System.out.println("Brightness adjusted.");
+            } 
+          else {
+             System.out.println("Brightness out of range. Set between 0 to 10.");
+             level -= x;
+         }
+       }
+    }
+
+    public String resetSettings() {
+        level = 1;
+        return "Light settings have been reset.";
+    }
+}
+
+// Task 4
+
+public class ChickenBurger{
+  public String bun = "Sesame";
+  public int price = 200;
+  public String sauceOption = "Less";
+  public String spiceLevel = "Not Set";
+  public String[] levels = {"Mild", "Spicy", "Naga", "Extreme"};
+ 
+  public String serveBurger(){
+    if (spiceLevel.equals("Not Set")){
+      return "Cannot serve now. Customize Spice Level first.";
+    }
+    else{
+      return "The burger is being served:-\n Bun Type: "+ bun+ "\n Price: "+ price+ "\n Sauce Option:"+ sauceOption+ "\n Spice Level:"+ spiceLevel;
+    }
+      
+  }
+  
+  public void customizeSpiceLevel(String x){
+    for (int i = 0; i < levels.length; i++) {
+      if (levels[i].equals(x)){
+        System.out.println("Spice level set to "+ x+".");
+        spiceLevel = x;
+        return;
+      }  
+    }
+    System.out.println("This spice level is unavailable.");       
+  }
+}
+
+
+// Task 5
+
+public class MobilePhone{ 
+  public int capacity;
+  public String[] names; 
+  public int[] numbers; 
+  public int count; 
+  
+  public void setContactCapacity(int x){
+    capacity = x;
+    names = new String[x]; 
+    numbers = new int[x]; 
+  }
+    
+    public void details(){
+      System.out.println("Total contacts: "+ count);
+      System.out.println("Contact list: "); 
+      if(count>0){
+        for(int i=0;i<names.length;i++){
+        System.out.println(names[i] + ":" + numbers[i]);
+        }
+      }
+    }
+        public void addContact(String name, int num){ 
+          if(count<capacity){
+            System.out.println("The contact of "+ name + " is added.");
+            names[count] = name;
+            numbers[count] = num; 
+            count++;
+          }
+            else{
+              System.out.println("Storage Full!!"); 
+            }
+        }
+              public void makeCall(int num){ 
+                boolean checker = false;
+                for(int i = 0; i<numbers.length; i++){
+                  if(num == numbers[i]){ 
+                    System.out.println("Calling "+ names[i] + "...");
+                    checker = true; 
+                    break;
+                  }
+                }
+                if(!checker){
+                  System.out.println("Calling "+num + "...");
+                }
+              }
+}
+     
+
+// Task 8
+
+public class Shape{
+  public String name ;
+  public double area;
+  
+  public void setParameters(String x, int y){
+    name =x;
+    area =  Math.PI * y * y;     
+  }
+  
+    public void setParameters(String x, int y, int z){
+    name =x;
+    area =  0.5 * y * z;    
+  }
+    public void setParameters(String x, int y, int z, int h){
+    name =x;
+    area =  0.5* (y+z) * h;     
+  }
+    
+    public String details(){
+      return "Shape Name: " + name + "\n Area: " + area;
+  }  
+}
+
