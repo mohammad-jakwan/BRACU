@@ -1,0 +1,422 @@
+STRING
+
+//Task 1 
+
+import java.util.Scanner;
+
+public class L3_T1{
+  public static void main (String [] args){
+    
+    Scanner sc = new Scanner(System.in);
+    System.out.println("PLease enter a string:");
+    String input = sc.nextLine();
+    String empty = "";
+    String empty2 = "";
+  
+  int mid =input.length()/2;
+  if(input.length()%2==0){
+    for (int i =0; (i<(input.length()- mid)); i++){
+      char a= input.charAt(i);
+      empty=empty+a;
+    }
+    
+    for (int j = (input.length()-1); j>= mid; j --){
+      char b=input.charAt(j);
+      empty2=empty2+b;
+    }
+  }
+    else{
+      for (int i =0; (i<(input.length()- mid-1)); i++){
+        char a= input.charAt(i);
+        empty=empty+a;
+      }
+      for (int j = (input.length()-1); j> mid; j --){
+        char b=input.charAt(j);
+        empty2=empty2+b;
+    }
+  
+    }
+    if (empty.equals(empty2)){
+      System.out.println("Palindrome");
+    }
+    else{
+      System.out.println("Not a palindrome");
+}
+}
+}
+
+//Task 2
+
+import java.util.Scanner;
+
+public class L3_T2{
+  public static void main (String [] args){
+    
+    Scanner sc = new Scanner(System.in);
+    String input = sc.nextLine();
+
+    
+    for (int i =0; (i<input.length()); i++){
+      int store= input.codePointAt(i);
+      if (store!=97){
+        store -=1;
+        System.out.print((char)store);
+      }
+         else{
+           System.out.print("z");
+         }
+    }
+  }
+}
+             
+
+//Task 3
+
+import java.util.Scanner;
+
+public class L3_T3{
+  public static void main (String [] args){
+    
+    Scanner sc = new Scanner(System.in);
+    String input = sc.nextLine();
+
+    
+    for (int i =0; i<input.length(); i++){
+      for (int j = 0; j< i+1; j ++){
+        System.out.print(input.charAt(j));
+        
+      }
+      System.out.println();
+    }
+  }
+}
+
+
+// Task 4
+        
+import java.util.Scanner;
+public class L3_T4 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            int count = 1;
+            System.out.println("Enter a string:");
+            String str = sc.nextLine();
+            String d = "";
+            int leng = str.length();
+            boolean e = false;
+            for (int i = 0; i < leng; i++) {
+                char ch = str.charAt(i);
+                count = 0;
+                for (int j = 0; j < leng; j++) {
+                    if (ch == str.charAt(j) && !d.contains("" + ch)) {
+                        count++;
+                    }
+                }
+                if (count > 1) {
+                    System.out.println("'" + ch + "' has been counted " + count + " times in the word " + str);
+                    d += ch;
+                    e = true;
+                }
+            }
+
+            if (e == false) {
+                System.out.println("You entered " + str);
+                break;
+            }
+        }
+    }
+}
+
+// Task 5
+
+import java.util.Scanner;
+public class L3_T5{
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("PLease enter String 1:");
+        String a=sc.nextLine();
+        System.out.println("PLease enter String 2:");
+        String b=sc.nextLine();
+        int sum=0;
+ 
+
+        String c=" ";
+        String d=a+c+b;
+
+        for(int i=0;i<d.length();i++){
+          int f = d.codePointAt(i);
+            if((f>=65 && f<=90) || (f>=97 && f<=122)){
+              sum=sum+f;
+            }
+     }
+        System.out.println(d);
+        System.out.println(sum);
+
+    }
+}
+
+// Task 6 
+
+import java.util.Scanner;
+public class L3_T6{
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Please enter a String:");
+        String input=sc.nextLine();
+
+        String empty="";
+        int j=0;
+        System.out.print(input.charAt(j));
+        for(int i=0;i<input.length();i++){
+            if(input.charAt(i)!= input.charAt(j)){
+                empty+=input.charAt(i);
+                j=i;
+            }
+        }
+        System.out.println(empty);
+    }
+}
+
+
+
+
+ARRAY
+
+
+// Task 1
+
+import java.util.Scanner;
+
+public class L3_T1_A {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the number of elements (N): ");
+        int N = sc.nextInt();
+        int[] array = new int[N];
+
+        System.out.println("Enter the array elements:");
+        for (int i = 0; i < N; i++) {
+            array[i] = sc.nextInt();
+        }
+
+        System.out.print("Remove Element: ");
+        int remove = sc.nextInt();
+        int newsize = 0;
+        int count=0;
+        for (int i = 0; i < N; i++) {
+            int temp = array[i];
+            if(temp==remove){
+                count++;
+            }
+            if (temp != remove) {
+                newsize++;
+            }
+        }
+        if(count>0) {D
+
+            int[] arra = new int[newsize];
+            int index = 0;
+            for (int j = 0; j < N; j++) {
+                if (array[j] != remove) {
+                    arra[index++] = array[j];
+                }
+            }
+            System.out.println("input array");
+            for (int k = 0; k < N; k++) {
+                System.out.print(array[k] + " ");
+            }
+            System.out.println();
+            System.out.println("new array:");
+            for (int j = 0; j < newsize; j++) {
+                System.out.print(arra[j] + " ");
+            }
+        }
+        else{
+            System.out.println("input array");
+            for (int k = 0; k < N; k++) {
+                System.out.print(array[k] + " ");
+            }
+            System.out.println();
+            System.out.println("Element not found");
+        }
+
+    }
+}
+
+
+// Task 2
+
+import java.util.*;
+public class L3_T2_A{
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        int [] arr1= new int [5];
+        int max = -9999999;
+        int min = 99999999;
+        int locmax=0;
+        int locmin=0;
+        
+
+        for(int i=0;i<5;i++){
+          int element = sc.nextInt();
+          arr1[i]= element;
+        }
+                 
+        for (int j =0; j<arr1.length; j++){
+          if (arr1[j]>max){
+            max = arr1[j];
+            locmax=j;         
+          }
+        }
+
+          System.out.println("The lagest number "+max+" was found at location "+locmax+".");
+   
+        for (int i =0; i<arr1.length; i++){
+          if (arr1[i]<min){
+            min= arr1[i];
+            locmin=i;         
+          }
+        }
+
+          System.out.println("The smallest number "+min+" was found at location "+locmin+".");
+        
+          
+    }
+}
+
+// Task 3
+
+import java.util.*;
+public class L3_T3_A{
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("N");
+        int size=sc.nextInt();
+        int [] arr1= new int [size];
+
+        for(int i=0;i<size;i++){
+          int element = sc.nextInt();
+          arr1[i]= element;
+     }
+                 
+        for (int i=arr1.length -1 ; i>=0; i--){
+          System.out.print(arr1[i] + " ");
+          }
+        
+          
+    }
+}
+
+// Task 4
+
+import java.util.Scanner;
+
+public class L3_T4_A {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("N = ");
+        int n=sc.nextInt();
+        int arr[] = new int[n];        
+        boolean checked[] = new boolean[n];  
+
+        System.out.println("Enter N integers:");
+
+        // Input the array elements
+        for (int i = 0; i < arr.length; i++) { 
+            arr[i] = sc.nextInt();
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            int count = 0;
+            
+            if (!checked[i]) { 
+                for (int j = 0; j < arr.length; j++) {
+                    if (arr[i] == arr[j]) {
+                        count++;
+                        checked[j] = true; 
+                    }
+                }
+                if (count > 0) {
+                    System.out.println(arr[i] + " occurred " + count + " times");
+                }
+            }
+        }
+    }
+}
+
+
+// Task 5
+
+import java.util.Scanner;
+public class L2_T5_A{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] arr = new int[N];
+        System.out.println("Please enter the elements of the array:");
+        for (int i = 0; i < N; i++) {
+            arr[i] = sc.nextInt();
+        }
+        int[] newarr = new int[N];
+        int count = 0;
+        newarr[0] = arr[0];
+        int index=1;
+        for (int i = 1; i < N; i++) {
+            if (arr[i] != arr[i - 1]) {
+                newarr[index] = arr[i];
+                index++;
+            } else {
+                count++;
+            }
+        }
+        System.out.print("New Array: ");
+        for (int i = 0; i < index; i++) {
+            System.out.print(newarr[i] + " ");
+        }
+        System.out.println();
+        System.out.println("Removed elements: " + count);
+    }
+}
+
+// Task 6
+
+import java.util.*;
+public class L3_T6_A{
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        int size=sc.nextInt();
+        int [] arr1= new int [size];
+
+        for(int i=0;i<size;i++){
+          int element = sc.nextInt();
+          arr1[i]= element;
+        } 
+        for (int j =0; j<arr1.length-1; j++){
+          for (int i = 0; i<arr1.length-i-1; i++){
+            if (arr1[j]>arr1[j+1]){
+              int temp = arr1[j];
+              arr1[j] = arr1[j+1];
+              arr1[j+1] = temp;
+            }
+          }
+        }
+        
+        if(size%2!=0){
+          System.out.println("The median is "+arr1[arr1.length/2]);
+        }
+        else{
+          System.out.println("The median is "+(arr1[arr1.length/2]+arr1[arr1.length/2-1])/2);
+        }
+
+        System.out.println(Arrays.toString(arr1));
+        
+    }
+}
+
+
+
+
+
+
+      
