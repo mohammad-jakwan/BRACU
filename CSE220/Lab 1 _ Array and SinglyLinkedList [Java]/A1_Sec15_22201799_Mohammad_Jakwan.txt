@@ -1,0 +1,120 @@
+ // Task 01
+
+ public static Integer[] mergeSortedArray( Integer[] arr1, Integer[] arr2 ){
+        int n = arr1.length, m = arr2.length;
+        Integer[] mergedArray = new Integer[n + m];
+        int i = 0, j = 0, k = 0;
+        
+        while (i < n && j < m) {
+            if (arr1[i] <= arr2[j]){
+                mergedArray[k++] = arr1[i++];
+            }
+            else {
+                mergedArray[k++] = arr2[j++];
+            }
+        }
+        
+        
+        while (i < n) {
+            mergedArray[k++] = arr1[i++];
+        }
+        
+        while (j < m) {
+            mergedArray[k++] = arr2[j++];
+        }
+        return mergedArray;
+
+    }
+ 
+// Task 02
+
+class Task2{
+
+    //Complete this method so that it gives the Expected Output
+    public static void mostWater( Integer[] height ){
+
+        int left = 0, right = height.length - 1;
+        int max = 0;
+        
+        while(left < right){
+            int minHeight = Math.min(height[left], height[right]);
+            int width = right - left;
+            int area = minHeight * width;
+            max = Math.max(max, area);
+            
+        
+            if(height[left] < height[right]){
+                left++;
+            }
+            else {
+                right--;
+            }
+        }
+        
+        System.out.println(max);
+    }
+
+ // Task 03
+
+public class Task3 {
+
+    //Two heads are being passed onto this method
+    //and a String is expected as return
+    public static String checkSimilar( Node building1, Node building2 ){
+   
+        Node a = building1;
+        Node b = building2;
+    
+        while ( a != null && b != null){
+            if (!a.elem.equals(b.elem)){
+                return "Not Similar";
+            }
+            a = a.next;
+            b = b.next;
+        }
+        if (a != null || b != null){
+            return "Not Similar";
+        }
+    
+        return "Similar";
+    }
+    
+// Task 04
+
+public class Task4 {
+
+    public static Boolean assembleCongaLine(Node head){
+
+        for(Node current = head; current.next != null; current = current.next) {
+            if ((Integer)current.elem > (Integer)current.next.elem) {
+              return false;
+              }
+        }
+      
+        return true;
+    }
+      
+
+// Task 05
+
+public class Task5 {
+    public static int sumDist(Node head, Integer[] distArr) {
+    
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++){
+            int distance = arr[i];
+            Node current = head;  
+        
+        for (int j = 0; j < distance && current != null; j++){
+            current = current.next;
+          }
+            
+         if (current != null){
+         sum += (Integer) current.elem;
+           }
+        }
+            
+         return sum; 
+        
+    }
+    
