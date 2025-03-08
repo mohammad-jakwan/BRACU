@@ -1,0 +1,288 @@
+Singly Linked List 
+
+// Task 01
+
+public class Task1 {
+
+    public static Node alternateMerge( Node head1, Node head2 ){
+        
+        Node a = head1;
+
+      Node next2;
+      for(Node b = head2; a != null && b != null; b = next2) {
+         Node next1 = a.next;
+         next2 = b.next;
+         a.next = b;
+         if (next1 == null) {
+            break;
+         }
+
+         b.next = next1;
+         a = next1;
+      }
+
+      return head1;
+   }
+
+    
+
+
+// Task 02
+
+public class Task2 {
+
+    public static Node wordDecoder( Node head ){
+        
+        int count = 0;
+        Node current = head;
+        while (current != null){
+            count++;
+            current = current.next;
+        }  
+        int step = 13 % count;
+        Node empty = new Node(null); 
+        Node tail = empty;          
+        current = head;
+        int idx = 0;
+
+        while (current != null){
+           if (idx % step == 0){ 
+              Node newNode = new Node(current.elem);
+              newNode.next = tail.next;             
+              tail.next = newNode;
+            }
+            idx++;
+            current = current.next;
+        }
+        return empty.next;
+      }
+
+
+// Task 03
+
+public class Task3 {
+
+    public static Node idGenerator(Node head1, Node head2, Node head3) {
+   
+         Node reversedHead1 = reverseList(head1);
+         Node curr2 = head2;
+         Node curr3 = head3;
+         Node four = null;
+         Node fourTail = null;
+ 
+         while (curr2 != null && curr3 != null) {
+             int sum = (Integer) curr2.elem + (Integer) curr3.elem;
+             int digit = sum % 10; 
+ 
+             Node newNode = new Node(digit);
+             if (four == null) {
+                 four = newNode;
+                 fourTail = newNode;
+             } else {
+                 fourTail.next = newNode;
+                 fourTail = newNode;
+             }
+ 
+             curr2 = curr2.next;
+             curr3 = curr3.next;
+         }
+ 
+         
+         Node curr = reversedHead1;
+         while (curr.next != null) {
+             curr = curr.next;
+         }
+         curr.next = four;
+ 
+         return reversedHead1;
+     }
+
+      private static Node reverseList(Node head) {
+         Node prev = null;
+         Node current = head;
+         while (current != null) {
+             Node nextNode = current.next;
+             current.next = prev;
+             prev = current;
+             current = nextNode;
+         }
+         return prev;
+     }
+
+
+
+Doubly Linked List 
+
+class Patient {
+   public Integer id;
+   public String name;
+   public Integer age;
+   public String bloodGroup;
+   public Patient next;
+   public Patient prev;
+
+   public Patient(Integer id, String name, Integer age, String bloodGroup, Patient next, Patient prev) {
+      this.id = id;
+      this.name = name;
+      this.age = age;
+      this.bloodGroup = bloodGroup;
+      this.next = next;
+      this.prev = prev;
+   }
+
+   public String toString() {
+      return "Patient{id=" + this.id + ", name=" + this.name + ", age=" + this.age + ", bloodGroup=" + this.bloodGroup + "}";
+   }
+}
+
+
+public class WRM {
+    Patient dh; // Dummy Head for Doubly Circular Linked List
+
+    public WRM() {
+        dh = new Patient(null, null, null, null, null, null);
+        dh.next = dh;
+        dh.prev = dh;
+    }
+
+    public void registerPatient(int id, String name, int age, String bloodGroup){
+        Patient newPatient = new Patient(id, name, age, bloodGroup, dh, dh.prev);
+        dh.prev.next = newPatient;
+        dh.prev = newPatient;
+        System.out.println("Patient registered successfully.");
+    }
+
+    
+    public void servePatient(){
+        if (dh.next == dh){
+            System.out.println("No patients to serve.");
+        }
+
+	else{
+            Patient toServe = dh.next; 
+            System.out.println("Serving patient: " + toServe.name);
+            dh.next = toServe.next;
+            toServe.next.prev = dh;
+        }
+    }
+
+    public void showAllPatient() {
+        if(dh.next == dh){
+            System.out.println("No patients in the waiting room.");
+        }
+ 
+	else{
+            Patient current = dh.next;
+            System.out.println("Patients in the waiting room:");
+            while (current != dh) {
+                System.out.println(current);
+                current = current.next;
+            }
+        }
+    }
+
+    public boolean canDoctorGoHome(){
+        return dh.next == dh;
+    }
+
+    public void cancelAll(){
+        dh.next = dh;
+        dh.prev = dh;
+        System.out.println("All appointments canceled.");
+    }
+
+    public void reverseTheLine(){
+        if (dh.next == dh) {
+            System.out.println("No patients to reverse.");
+            return;
+        }
+
+        Patient current = dh.next;
+        Patient temp = null;
+        while (current != dh){
+            temp = current.next;
+            current.next = current.prev;
+            current.prev = temp;
+            current = temp;
+        }
+        temp = dh.next;
+        dh.next = dh.prev;
+        dh.prev = temp;
+
+        System.out.println("Patient line reversed successfully.");
+    }
+}
+
+import java.util.Scanner;
+
+public class WRMTester {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        WRM wrm = new WRM();
+        
+        System.out.println("** Welcome to Waiting Room Management System **");
+
+        while (true) {
+            System.out.println("\nOptions:");
+            System.out.println("1. Register Patient");
+            System.out.println("2. Serve Patient");
+            System.out.println("3. Show All Patients");
+            System.out.println("4. Can Doctor Go Home?");
+            System.out.println("5. Cancel All Appointments");
+            System.out.println("6. Reverse The Line");
+            System.out.println("7. Exit");
+            System.out.print("Enter choice: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            if (choice == 1){
+                System.out.print("Enter ID: ");
+                int id = scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("Enter Name: ");
+                String name = scanner.nextLine();
+                System.out.print("Enter Age: ");
+                int age = scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("Enter Blood Group: ");
+                String bloodGroup = scanner.nextLine();
+                boolean success = wrm.registerPatient(id, name, age, bloodGroup);
+                System.out.println(success ? "Success" : "Not Successful");
+                
+            } 
+		else if (choice == 2){
+                String servedPatient = wrm.servePatient();
+                System.out.println(servedPatient != null ? "Patient being served: " + servedPatient : "No 			patients to serve");
+                
+            }
+		 else if (choice == 3){
+                wrm.showAllPatients();
+                
+            } 
+		else if (choice == 4){
+                System.out.println(wrm.canDoctorGoHome() ? "Yes" : "No");
+                
+            } 
+		else if (choice == 5){
+                boolean success = wrm.cancelAll();
+                System.out.println(success ? "Success" : "Not Successful");
+                
+            } 
+		else if (choice == 6){
+                boolean success = wrm.reverseTheLine();
+                System.out.println(success ? "Success" : "Not Successful");
+                
+            } 
+		else if (choice == 7){
+                System.out.println("Exiting... Thank you!");
+                scanner.close();
+                break;
+                
+            } 
+		else{
+                System.out.println("Invalid choice! Please try again.");
+            }
+        }
+    }
+}
