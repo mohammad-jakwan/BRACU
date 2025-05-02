@@ -1,0 +1,536 @@
+import java.util.*;
+
+class UndirectedGraph {
+   private int numVertices;
+   private int[][] matrix;
+   private List<List<int[]>> adjList;
+
+   public UndirectedGraph(int var1) {
+      this.numVertices = var1;
+      this.matrix = new int[var1][var1];
+      this.adjList = new ArrayList();
+
+      for(int var2 = 0; var2 < var1; ++var2) {
+         this.adjList.add(new ArrayList());
+      }
+
+   }
+
+   public void convertFromDirected(DirectedGraph var1){
+      int[][] var2 = var1.getMatrix();
+      List var3 = var1.getAdjList();
+
+      int var4;
+      for(var4 = 0; var4 < this.numVertices; ++var4){
+         for(int var5 = 0; var5 < this.numVertices; ++var5){
+            if (var2[var4][var5] != 0) {
+               this.matrix[var4][var5] = var2[var4][var5];
+               this.matrix[var5][var4] = var2[var4][var5];
+            }
+         }
+      }
+
+      for(var4 = 0; var4 < this.numVertices; ++var4) {
+         Iterator var9 = ((List)var3.get(var4)).iterator();
+
+         while(var9.hasNext()) {
+            int[] var6 = (int[])var9.next();
+            int var7 = var6[0];
+            int var8 = var6[1];
+            this.addEdgeToList(var4, var7, var8);
+            this.addEdgeToList(var7, var4, var8);
+         }
+      }
+
+   }
+
+   private void addEdgeToList(int var1, int var2, int var3) {
+      ((List)this.adjList.get(var1)).add(new int[]{var2, var3});
+   }
+
+   public int[][] getMatrix() {
+      return this.matrix;
+   }
+
+   public List<List<int[]>> getAdjList() {
+      return this.adjList;
+   }
+
+   public void printMatrix() {
+      int[][] var1 = this.matrix;
+      int var2 = var1.length;
+
+      for(int var3 = 0; var3 < var2; ++var3) {
+         int[] var4 = var1[var3];
+         System.out.println(Arrays.toString(var4));
+      }
+
+   }
+
+   public void printAdjList(){
+      for(int var1 = 0; var1 < this.adjList.size(); ++var1){
+         System.out.print("Vertex " + var1 + ": ");
+         Iterator var2 = ((List)this.adjList.get(var1)).iterator();
+
+         while(var2.hasNext()) {
+            int[] var3 = (int[])var2.next();
+            System.out.print("(" + var3[0] + ", " + var3[1] + ") ");
+         }
+
+         System.out.println();
+      }
+
+   }
+}
+
+
+// Task 1
+
+import java.util.*;
+
+public class Task1 {
+
+    public static int[] findMaxDegreeMatrix(int[][] adjMatrix) {
+        int n = adjMatrix.length;
+        int maxDegree = 0;
+        int maxDegreeVertex = 0;
+
+        for (int i = 0; i < n; i++) {
+            int currentDegree = 0;
+            for (int j = 0; j < n; j++) {
+                currentDegree += adjMatrix[i][j];
+            }
+
+            if (currentDegree > maxDegree) {
+                maxDegree = currentDegree;
+                maxDegreeVertex = i;
+            }
+        }
+
+        return new int[] { maxDegree, maxDegreeVertex };
+    }
+
+    public static int[] findMaxDegreeList(List<List<Integer>> adjList) {
+        int maxDegree = 0;
+        int maxDegreeVertex = 0;
+
+        for (int vertex = 0; vertex < adjList.size(); vertex++) {
+            int currentDegree = adjList.get(vertex).size();
+
+            if (currentDegree > maxDegree) {
+                maxDegree = currentDegree;
+                maxDegreeVertex = vertex;
+            }
+        }
+
+        return new int[] { maxDegree, maxDegreeVertex };
+    }
+
+    public static void main(String[] args) {
+    
+        int[][] adjMatrix = {
+            {0, 1, 1, 1, 0, 1, 0},
+            {1, 0, 1, 1, 1, 1, 0},
+            {1, 1, 0, 1, 1, 1, 1},
+            {1, 1, 1, 0, 0, 1, 1},
+            {0, 1, 1, 0, 0, 1, 0},
+            {1, 1, 1, 1, 1, 0, 1},
+            {0, 0, 1, 1, 0, 1, 0}
+        };
+
+        List<List<Integer>> adjList = new ArrayList<>();
+        adjList.add(Arrays.asList(1, 2, 3, 5));
+        adjList.add(Arrays.asList(0, 2, 3, 4, 5));
+        adjList.add(Arrays.asList(0, 1, 3, 4, 5, 6));
+        adjList.add(Arrays.asList(0, 1, 2, 5, 6));
+        adjList.add(Arrays.asList(1, 2, 5));
+        adjList.add(Arrays.asList(0, 1, 2, 3, 4, 6));
+        adjList.add(Arrays.asList(2, 3, 5));
+
+        int[] matrixResult = findMaxDegreeMatrix(adjMatrix);
+        int[] listResult = findMaxDegreeList(adjList);
+
+        System.out.println("Matrix Implemented Max Degree: " + matrixResult[0] + ", Vertex: " + matrixResult[1]);
+        System.out.println("List Implementation - Max Degree: " + listResult[0] + ", Vertex: " + listResult[1]);
+    }
+}
+
+
+// Task 2 
+
+import java.util.*;
+
+class WeightedGraph {
+    private int numVertices;
+    private int maxEdges;
+    private int[][] matrix;
+    private int[][] neighbors;
+    private int[][] weights;
+    private int[] edgeCounts;
+
+    public WeightedGraph(int numVertices, int maxEdges) {
+        this.numVertices = numVertices;
+        this.maxEdges = maxEdges;
+        this.matrix = new int[numVertices][numVertices];
+        this.neighbors = new int[numVertices][maxEdges];
+        this.weights = new int[numVertices][maxEdges];
+        this.edgeCounts = new int[numVertices];
+
+        for (int[] row : neighbors) {
+            Arrays.fill(row, -1);
+        }
+
+        for (int[] row : weights) {
+            Arrays.fill(row, -1);
+        }
+    }
+
+    public void addEdge(int vertex1, int vertex2, int weight) {
+        matrix[vertex1][vertex2] = weight;
+        matrix[vertex2][vertex1] = weight;
+
+        int index1 = edgeCounts[vertex1];
+        if (index1 < maxEdges) {
+            neighbors[vertex1][index1] = vertex2;
+            weights[vertex1][index1] = weight;
+            edgeCounts[vertex1]++;
+        }
+
+        int index2 = edgeCounts[vertex2];
+        if (index2 < maxEdges) {
+            neighbors[vertex2][index2] = vertex1;
+            weights[vertex2][index2] = weight;
+            edgeCounts[vertex2]++;
+        }
+    }
+
+    public int[] maxWeightedSumUsingMatrix() {
+        int maxSum = 0;
+        int maxVertex = 0;
+
+        for (int vertex = 0; vertex < numVertices; vertex++) {
+            int currentSum = 0;
+            for (int weight : matrix[vertex]) {
+                currentSum += weight;
+            }
+            if (currentSum > maxSum) {
+                maxSum = currentSum;
+                maxVertex = vertex;
+            }
+        }
+
+        return new int[] { maxVertex, maxSum };
+    }
+
+    public int[] maxWeightedSumUsingArrays() {
+        int maxSum = 0;
+        int maxVertex = 0;
+
+        for (int vertex = 0; vertex < numVertices; vertex++) {
+            int currentSum = 0;
+            for (int i = 0; i < edgeCounts[vertex]; i++) {
+                if (weights[vertex][i] != -1) {
+                    currentSum += weights[vertex][i];
+                }
+            }
+            if (currentSum > maxSum) {
+                maxSum = currentSum;
+                maxVertex = vertex;
+            }
+        }
+
+        return new int[] { maxVertex, maxSum };
+    }
+
+    public static void main(String[] args) {
+        WeightedGraph graph = new WeightedGraph(7, 6);
+
+        int[][] edges = {
+            {0, 1, 5}, {0, 2, 4}, {0, 3, 3}, {0, 5, 6},
+            {1, 2, 2}, {1, 3, 6}, {1, 4, 3}, {1, 5, 3},
+            {2, 3, 4}, {2, 4, 5}, {2, 5, 4}, {2, 6, 3},
+            {3, 5, 5}, {3, 6, 4}, {4, 5, 2}, {5, 6, 3}
+        };
+
+        for (int[] edge : edges) {
+            graph.addEdge(edge[0], edge[1], edge[2]);
+        }
+
+        int[] matrixResult = graph.maxWeightedSumUsingMatrix();
+        int[] arrayResult = graph.maxWeightedSumUsingArrays();
+
+        System.out.println("Using adjacency matrix:");
+        System.out.println("Vertex -> [" + matrixResult[0] + "] has the highest weight; And sum of that vertex is " + matrixResult[1] + ".");
+
+        System.out.println("\nUsing arrays:");
+        System.out.println("Vertex -> [" + arrayResult[0] + "] has the highest weight; And sum of that vertex is " + arrayResult[1] + ".");
+    }
+}
+
+
+// Task 3 
+
+import java.util.*;
+
+class DirectedGraph {
+    private int numVertices;
+    private int maxEdges;
+    private int[][] matrix;
+    private int[][] outNeighbors;
+    private int[][] weights;
+    private int[] outEdgeCounts;
+
+    public DirectedGraph(int numVertices, int maxEdges) {
+        this.numVertices = numVertices;
+        this.maxEdges = maxEdges;
+        this.matrix = new int[numVertices][numVertices];
+        this.outNeighbors = new int[numVertices][maxEdges];
+        this.weights = new int[numVertices][maxEdges];
+        this.outEdgeCounts = new int[numVertices];
+
+        for (int[] row : outNeighbors) {
+            Arrays.fill(row, -1);
+        }
+
+        for (int[] row : weights) {
+            Arrays.fill(row, -1);
+        }
+    }
+
+    public void addEdge(int fromVertex, int toVertex, int weight) {
+        matrix[fromVertex][toVertex] = weight;
+
+        int idx = outEdgeCounts[fromVertex];
+        if (idx < maxEdges) {
+            outNeighbors[fromVertex][idx] = toVertex;
+            weights[fromVertex][idx] = weight;
+            outEdgeCounts[fromVertex]++;
+        }
+    }
+
+    public int[] findMaxOutDegreeMatrix() {
+        int maxDegree = 0;
+        int maxVertex = 0;
+
+        for (int vertex = 0; vertex < numVertices; vertex++) {
+            int degree = 0;
+            for (int j = 0; j < numVertices; j++) {
+                if (matrix[vertex][j] != 0) {
+                    degree++;
+                }
+            }
+            if (degree > maxDegree) {
+                maxDegree = degree;
+                maxVertex = vertex;
+            }
+        }
+
+        return new int[] { maxVertex, maxDegree };
+    }
+
+    public int[] findMaxOutDegreeArrays() {
+        int maxDegree = 0;
+        int maxVertex = 0;
+
+        for (int vertex = 0; vertex < numVertices; vertex++) {
+            int degree = outEdgeCounts[vertex];
+            if (degree > maxDegree) {
+                maxDegree = degree;
+                maxVertex = vertex;
+            }
+        }
+
+        return new int[] { maxVertex, maxDegree };
+    }
+
+    public int[] maxWeightSumMatrix() {
+        int maxSum = 0;
+        int maxVertex = 0;
+
+        for (int vertex = 0; vertex < numVertices; vertex++) {
+            int currentSum = 0;
+            for (int j = 0; j < numVertices; j++) {
+                currentSum += matrix[vertex][j];
+            }
+            if (currentSum > maxSum) {
+                maxSum = currentSum;
+                maxVertex = vertex;
+            }
+        }
+
+        return new int[] { maxVertex, maxSum };
+    }
+
+    public int[] maxWeightedSumOfArrays() {
+        int maxSum = 0;
+        int maxVertex = 0;
+
+        for (int vertex = 0; vertex < numVertices; vertex++) {
+            int currentSum = 0;
+            for (int i = 0; i < outEdgeCounts[vertex]; i++) {
+                currentSum += weights[vertex][i];
+            }
+            if (currentSum > maxSum) {
+                maxSum = currentSum;
+                maxVertex = vertex;
+            }
+        }
+
+        return new int[] { maxVertex, maxSum };
+    }
+
+    public static void main(String[] args) {
+        DirectedGraph graph = new DirectedGraph(7, 6);
+
+        int[][] edges = {
+            {0, 1, 5}, {0, 2, 4}, {0, 3, 3}, {0, 5, 6},
+            {1, 2, 2}, {1, 3, 6}, {1, 4, 3}, {1, 5, 3},
+            {2, 3, 4}, {2, 4, 5}, {2, 5, 4}, {2, 6, 3},
+            {3, 5, 5}, {3, 6, 4}, {4, 5, 2}, {5, 6, 3}
+        };
+
+        for (int[] edge : edges) {
+            graph.addEdge(edge[0], edge[1], edge[2]);
+        }
+
+        int[] matrixDegree = graph.findMaxOutDegreeMatrix();
+        int[] arrayDegree = graph.findMaxOutDegreeArrays();
+        System.out.println("Task 1 - Maximum Out-degree:");
+        System.out.println("Matrix: Vertex " + matrixDegree[0] + " has max out-degree of " + matrixDegree[1] + ".");
+        System.out.println("Arrays: Vertex " + arrayDegree[0] + " has max out-degree of " + arrayDegree[1] + ".");
+
+        int[] matrixWeight = graph.maxWeightSumMatrix();
+        int[] arrayWeight = graph.maxWeightedSumOfArrays();
+        System.out.println("\nTask 2 - Maximum Outgoing Weight Sum:");
+        System.out.println("Matrix: Vertex " + matrixWeight[0] + " has max weight sum of " + matrixWeight[1] + ".");
+        System.out.println("Arrays: Vertex " + arrayWeight[0] + " has max weight sum of " + arrayWeight[1] + ".");
+    }
+}
+
+
+// Task 4 
+
+import java.util.*;
+
+class DirectedGraph {
+    private int numVertices;
+    private int[][] matrix;
+    private List<List<int[]>> adjList;
+
+    public DirectedGraph(int numVertices) {
+        this.numVertices = numVertices;
+        this.matrix = new int[numVertices][numVertices];
+        this.adjList = new ArrayList<>();
+
+        for (int i = 0; i < numVertices; i++) {
+            adjList.add(new ArrayList<>());
+        }
+    }
+
+    public void addEdge(int fromVertex, int toVertex, int weight) {
+        matrix[fromVertex][toVertex] = weight;
+        adjList.get(fromVertex).add(new int[] { toVertex, weight });
+    }
+
+    public int[][] getMatrix() {
+        return matrix;
+    }
+
+    public List<List<int[]>> getAdjList() {
+        return adjList;
+    }
+}
+
+class UndirectedGraph {
+    private int numVertices;
+    private int[][] matrix;
+    private List<List<int[]>> adjList;
+
+    public UndirectedGraph(int numVertices) {
+        this.numVertices = numVertices;
+        this.matrix = new int[numVertices][numVertices];
+        this.adjList = new ArrayList<>();
+
+        for (int i = 0; i < numVertices; i++) {
+            adjList.add(new ArrayList<>());
+        }
+    }
+
+    public void convertFromDirected(DirectedGraph directedGraph) {
+        int[][] directedMatrix = directedGraph.getMatrix();
+        List<List<int[]>> directedList = directedGraph.getAdjList();
+
+        for (int i = 0; i < numVertices; i++) {
+            for (int j = 0; j < numVertices; j++) {
+                if (directedMatrix[i][j] != 0) {
+                    matrix[i][j] = directedMatrix[i][j];
+                    matrix[j][i] = directedMatrix[i][j];
+                }
+            }
+        }
+
+        for (int u = 0; u < numVertices; u++) {
+            for (int[] edge : directedList.get(u)) {
+                int v = edge[0];
+                int weight = edge[1];
+                addEdgeToList(u, v, weight);
+                addEdgeToList(v, u, weight);
+            }
+        }
+    }
+
+    private void addEdgeToList(int vertex, int neighbor, int weight) {
+        adjList.get(vertex).add(new int[] { neighbor, weight });
+    }
+
+    public int[][] getMatrix() {
+        return matrix;
+    }
+
+    public List<List<int[]>> getAdjList() {
+        return adjList;
+    }
+
+    public void printMatrix() {
+        for (int[] row : matrix) {
+            System.out.println(Arrays.toString(row));
+        }
+    }
+
+    public void printAdjList() {
+        for (int vertex = 0; vertex < adjList.size(); vertex++) {
+            System.out.print("Vertex " + vertex + ": ");
+            for (int[] edge : adjList.get(vertex)) {
+                System.out.print("(" + edge[0] + ", " + edge[1] + ") ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+public class Task4 {
+    public static void main(String[] args) {
+        int numVertices = 7;
+        DirectedGraph directedGraph = new DirectedGraph(numVertices);
+
+        int[][] directedEdges = {
+            {0, 1, 5}, {0, 2, 3}, {0, 3, 6}, {1, 4, 4},
+            {1, 5, 2}, {2, 5, 8}, {2, 6, 7}, {3, 4, 3},
+            {3, 6, 2}, {4, 5, 6}, {4, 6, 5}, {5, 6, 4},
+            {5, 3, 1}, {6, 0, 7}, {1, 3, 3}, {2, 4, 2}
+        };
+
+        for (int[] edge : directedEdges) {
+            directedGraph.addEdge(edge[0], edge[1], edge[2]);
+        }
+
+        UndirectedGraph undirectedGraph = new UndirectedGraph(numVertices);
+        undirectedGraph.convertFromDirected(directedGraph);
+
+        System.out.println("Adjacency Matrix of Undirected Graph:");
+        undirectedGraph.printMatrix();
+
+        System.out.println("\nAdjacency List of Undirected Graph:");
+        undirectedGraph.printAdjList();
+    }
+}
