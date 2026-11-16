@@ -26,4 +26,4 @@ Code, labs, assignments and notes from my courses at BRAC University (BSc, Compu
 | [PHY112](PHY112) | Principles of Physics II | 3 |
 | [PSY101](PSY101) | Introduction to Psychology | 12 |
 
-Textbooks, recordings and anything containing other students' data are intentionally not included.
+Textbooks, recordings and anything containing other data are intentionally not included.
