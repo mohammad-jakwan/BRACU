@@ -2,6 +2,8 @@
 
 Code, labs, assignments and notes from my courses at BRAC University (BSc, Computer Science).
 
+This is an archive of my coursework from 2023 to 2026, uploaded to GitHub in November 2026. Commit dates follow the original file dates, so the history shows when the work was actually done.
+
 | Course | Title | Files |
 |---|---|---|
 | [CSE110](CSE110) | Programming Language I | 143 |
@@ -27,3 +29,6 @@ Code, labs, assignments and notes from my courses at BRAC University (BSc, Compu
 | [PSY101](PSY101) | Introduction to Psychology | 12 |
 
 Textbooks, recordings and anything containing other data are intentionally not included.
+
+**Commit activity by year:** [2023](https://github.com/mohammad-jakwan?tab=overview&from=2023-01-01&to=2023-12-31) · [2024](https://github.com/mohammad-jakwan?tab=overview&from=2024-01-01&to=2024-12-31) · [2025](https://github.com/mohammad-jakwan?tab=overview&from=2025-01-01&to=2025-12-31) · [2026](https://github.com/mohammad-jakwan?tab=overview&from=2026-01-01&to=2026-12-31)  
+My profile's year menu starts at 2025, the year I joined GitHub, so the earlier years are linked here.
